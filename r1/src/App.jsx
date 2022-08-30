@@ -47,7 +47,7 @@ function App() {
 
     const run = number => {
         setAnimals(s => 
-            [...s.map(a => a.number !== number ? {...a} : {...a, side: a.side === 'left' ? 'right' : 'left'})]
+            s.map(a => a.number !== number ? {...a} : {...a, side: a.side === 'left' ? 'right' : 'left'})
             .sort((a, b) => {
                 if (a.number === number) {
                     return 1;
