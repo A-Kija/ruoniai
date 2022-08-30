@@ -1,76 +1,56 @@
-import { useEffect } from 'react';
 import { useState } from 'react';
 import './App.scss';
+import rand from './Functions/rand';
 
 function App() {
 
+    const [animals, setAnimals] = useState([]);
 
-
-
-    const [count, setCount] = useState(1);
-
-    const [read, setRead] = useState(null);
-
-    const [text1, setText1] = useState('');
-
-    const [color, setColor] = useState('#57ac30');
-
-    const [bg, setBg] = useState('#57ac30');
-
-
-
-    const save = () => {
-        localStorage.setItem('number', count);
-        const jobj = JSON.stringify({cat: 'big'});
-        localStorage.setItem('obj', jobj);
-        localStorage.setItem('text', text1);
-        
+    const start = () => {
+        setAnimals(a => [...a, ...[...Array(rand(5, 20))].map(() => ({
+            type: rand(0, 1) ? 'cow' : 'sheep',
+            number: (''+ rand(0, 999999)).padStart(7, 0)
+        })).map(a => ({...a,
+             number: a.type === 'cow' ? 'K' + a.number : 'A' + a.number,
+             side: a.type === 'cow' ? 'left' : 'right'
+            }))]);
     }
 
-    const readNumber = () => {
-        setRead(localStorage.getItem('number'));
-        const obj = JSON.parse(localStorage.getItem('obj'));
-        console.log(obj.cat);
+    const run = number => {
+        setAnimals(s => 
+            [...s.map(a => a.number !== number ? {...a} : {...a, side: a.side === 'left' ? 'right' : 'left'})]
+            .sort((a, b) => {
+                if (a.number === number) {
+                    return 1;
+                }
+                if (b.number === number) {
+                    return -1;
+                }
+                return 0;
+            }
+        ))
     }
-
-    useEffect(() => {
-        setRead(localStorage.getItem('number'));
-        const obj = JSON.parse(localStorage.getItem('obj'));
-        if (null === obj) {
-            console.log('Cat gone');
-        } else {
-            console.log(obj.cat);
-        }
-        
-    }, []);
-
-    // useEffect(() => {
-    //     localStorage.setItem('text', text1);
-    // }, [text1]);
-    
-
-    const changeText1 = e => {
-        // console.log('bandau keist', e.target.value);
-        setText1(e.target.value);
-    }
-
 
 
     return (
         <div className="App">
-            <header className="App-header" style={{backgroundColor: bg}}>
-                <h1 contenteditable="true">Pirmadienis Nr: {count} Nuskaityta Nr: {read}</h1>
-                <div className="dog-bin">
-                <button onClick={() => setCount(c => c + 1)}>+1</button>
-                <button onClick={save}>Save</button>
-                <button onClick={readNumber}>Read</button>
-                <button onClick={() => setBg(color)}>Do BG</button>
+            <header className="App-header">
+               
+                <div className="field">
+                    <h1><span>GANYKLA</span>
+                        <button onClick={start}>Į Ganyklą</button>
+                    </h1>
+                    <div className="left">
+                        {
+                            animals.map(a => a.side === 'left' ? <div onClick={() => run(a.number)} key={a.number} className={a.type}>{a.number}</div> : null)
+                        }
+                    </div>
+                    <div className="right">
+                    {
+                            animals.map(a => a.side === 'right' ? <div onClick={() => run(a.number)} key={a.number} className={a.type}>{a.number}</div> : null)
+                        }
+                    </div>
                 </div>
-
-                <input type="text" value={text1} onChange={changeText1}></input>
-
-                <input type="color" value={color} onChange={e => setColor(e.target.value)}></input>
-
             </header>
         </div>
     );
