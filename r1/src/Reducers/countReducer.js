@@ -8,6 +8,12 @@ function countReducer(state, action) {
         case 'remove_one':
             stateCopy--;
             break;
+        case 'add':
+            stateCopy += action.payload;
+            break;
+        case 'remove':
+            stateCopy -= action.payload;
+            break;
         default:
     }
 
