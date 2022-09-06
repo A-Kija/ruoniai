@@ -1,18 +1,20 @@
+import { ADD, ADD_ONE, REMOVE, REMOVE_ONE } from "../Constants/actions";
+
 function countReducer(state, action) {
     let stateCopy = state;
 
     switch (action.type) {
-        case 'add_one':
+        case ADD_ONE:
             stateCopy++;
             break;
-        case 'remove_one':
+        case REMOVE_ONE:
             stateCopy--;
             break;
-        case 'add':
-            stateCopy += action.payload;
+        case ADD:
+            stateCopy += parseInt(action.payload);
             break;
-        case 'remove':
-            stateCopy -= action.payload;
+        case REMOVE:
+            stateCopy -= parseInt(action.payload);
             break;
         default:
     }

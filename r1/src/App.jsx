@@ -1,5 +1,6 @@
 import { useReducer } from 'react';
 import { useState } from 'react';
+import { add, add1, rem, rem1 } from './Actions';
 import './App.scss';
 import StarContext from './Components/019/StarContext';
 import countReducer from './Reducers/countReducer';
@@ -14,33 +15,33 @@ function App() {
     const [number, setNumber] = useState(0);
 
 
-    const add1 = () => {
-        const action = {
-            type: 'add_one'
-        }
-        countDispach(action);
-    }
+    // const add1 = () => {
+    //     const action = {
+    //         type: 'add_one'
+    //     }
+    //     countDispach(action);
+    // }
 
-    const rem1 = () => {
-        const action = {
-            type: 'remove_one'
-        }
-        countDispach(action);
-    }
-    const addSome = () => {
-        const action = {
-            type: 'add',
-            payload: parseInt(number)
-        }
-        countDispach(action);
-    }
-    const remSome = () => {
-        const action = {
-            type: 'remove',
-            payload: parseInt(number)
-        }
-        countDispach(action);
-    }
+    // const rem1 = () => {
+    //     const action = {
+    //         type: 'remove_one'
+    //     }
+    //     countDispach(action);
+    // }
+    // const addSome = () => {
+    //     const action = {
+    //         type: 'add',
+    //         payload: parseInt(number)
+    //     }
+    //     countDispach(action);
+    // }
+    // const remSome = () => {
+    //     const action = {
+    //         type: 'remove',
+    //         payload: parseInt(number)
+    //     }
+    //     countDispach(action);
+    // }
 
     return (
         <div className="App">
@@ -58,11 +59,11 @@ function App() {
                 {/* <button onClick={() => setStar(s => s + '*')}>Make Star</button>
                 <button onClick={() => setPlus(s => s + '+')}>Make Plus</button>
                 <Tevelis/> */}
-                <button onClick={add1}>+1</button>
-                <button onClick={rem1}>-1</button>
+                <button onClick={() => countDispach(add1())}>+1</button>
+                <button onClick={() => countDispach(rem1())}>-1</button>
                 <input type="number" value={number} onChange={e => setNumber(e.target.value)}></input>
-                <button onClick={addSome}>+++</button>
-                <button onClick={remSome}>---</button>
+                <button onClick={() => countDispach(add(number))}>+++</button>
+                <button onClick={() => countDispach(rem(number))}>---</button>
                 </div>
             </header>
             </StarContext.Provider>
