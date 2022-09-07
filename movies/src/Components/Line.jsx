@@ -16,7 +16,8 @@ function Line({ movie }) {
                     </div>
                 </div>
                 <div className="movie__buttons">
-
+                <button type="button" className="btn btn-outline-success">Edit</button>
+                <button type="button" className="btn btn-outline-danger">Delete</button>
                 </div>
             </div>
         </li>
