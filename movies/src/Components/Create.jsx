@@ -1,11 +1,25 @@
+import { useContext } from 'react';
 import { useState } from 'react';
 import genres from '../Data/genres';
+import DataContext from './DataContext';
 
 function Create() {
 
     const [title, setTitle] = useState('');
     const [genre, setGenre] = useState('0');
     const [year, setYear] = useState('');
+    const {setCreateData} = useContext(DataContext);
+
+    const add = () => {
+        setCreateData({
+            title,
+            genre: parseInt(genre),
+            year
+        });
+        setTitle('');
+        setGenre('0');
+        setYear('');
+    }
 
     return (
         <div className="card m-4">
@@ -28,7 +42,7 @@ function Create() {
                     <label className="form-label">Movie Year</label>
                     <input type="text" className="form-control" value={year} onChange={e => setYear(e.target.value)} />
                 </div>
-                <button type="button" className="btn btn-outline-success">Add</button>
+                <button onClick={add} type="button" className="btn btn-outline-success">Add</button>
             </div>
         </div>
     );
