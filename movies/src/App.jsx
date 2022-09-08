@@ -4,7 +4,7 @@ import Create from './Components/Create';
 import DataContext from './Components/DataContext';
 import Edit from './Components/Edit';
 import List from './Components/List';
-import { create, destroy, read } from './Functions/localStorage';
+import { create, destroy, read, update } from './Functions/localStorage';
 
 const key = 'movies';
 
@@ -16,6 +16,7 @@ function App() {
   const [createData, setCreateData] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
   const [modalData, setModalData] = useState(null);
+  const [editData, setEditData] = useState(null);
 
   // READ
   useEffect(() => {
@@ -41,6 +42,15 @@ function App() {
     setLastUpdate(Date.now())
   }, [deleteData]);
 
+  // EDIT
+  useEffect(() => {
+    if (null === editData) {
+      return;
+    }
+    update(key, editData, editData.id);
+    setLastUpdate(Date.now())
+  }, [editData]);
+
 
 
   return (
@@ -49,7 +59,8 @@ function App() {
       movies,
       setDeleteData,
       modalData,
-      setModalData
+      setModalData,
+      setEditData
     }}>
       <div className="container">
         <div className="row">
