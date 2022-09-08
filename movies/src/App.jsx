@@ -4,6 +4,7 @@ import Create from './Components/Create';
 import DataContext from './Components/DataContext';
 import Edit from './Components/Edit';
 import List from './Components/List';
+import Messages from './Components/Messages';
 import { create, destroy, read, update } from './Functions/localStorage';
 
 const key = 'movies';
@@ -17,6 +18,7 @@ function App() {
   const [deleteData, setDeleteData] = useState(null);
   const [modalData, setModalData] = useState(null);
   const [editData, setEditData] = useState(null);
+  const [msgs, setMsgs] = useState([]);
 
   // READ
   useEffect(() => {
@@ -73,6 +75,7 @@ function App() {
         </div>
       </div>
       <Edit />
+      <Messages />
     </DataContext.Provider>
   );
 }
