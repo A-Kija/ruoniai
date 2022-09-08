@@ -1,6 +1,11 @@
+import { useContext } from 'react';
 import genres from '../Data/genres';
+import DataContext from './DataContext';
 
 function Line({ movie }) {
+
+const { setDeleteData } = useContext(DataContext);
+
     return (
         <li className="list-group-item">
             <div className="movie">
@@ -9,7 +14,7 @@ function Line({ movie }) {
                         {movie.title}
                     </div>
                     <div className="movie__content__genre">
-                        {genres.find(g => g.id === movie.genre).type}
+                        {genres.find(g => g.id === movie.genre)?.type}
                     </div>
                     <div className="movie__content__year">
                         {movie.year}
@@ -17,7 +22,7 @@ function Line({ movie }) {
                 </div>
                 <div className="movie__buttons">
                 <button type="button" className="btn btn-outline-success">Edit</button>
-                <button type="button" className="btn btn-outline-danger">Delete</button>
+                <button onClick={() => setDeleteData(movie)} type="button" className="btn btn-outline-danger">Delete</button>
                 </div>
             </div>
         </li>
