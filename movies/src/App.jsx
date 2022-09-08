@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.scss';
 import Create from './Components/Create';
 import DataContext from './Components/DataContext';
+import Edit from './Components/Edit';
 import List from './Components/List';
 import { create, destroy, read } from './Functions/localStorage';
 
@@ -14,6 +15,7 @@ function App() {
   const [movies, setMovies] = useState(null);
   const [createData, setCreateData] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
+  const [modalData, setModalData] = useState(null);
 
   // READ
   useEffect(() => {
@@ -45,7 +47,9 @@ function App() {
     <DataContext.Provider value={{
       setCreateData,
       movies,
-      setDeleteData
+      setDeleteData,
+      modalData,
+      setModalData
     }}>
       <div className="container">
         <div className="row">
@@ -57,6 +61,7 @@ function App() {
           </div>
         </div>
       </div>
+      <Edit />
     </DataContext.Provider>
   );
 }
