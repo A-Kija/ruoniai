@@ -21,6 +21,18 @@ function Create() {
         setYear('');
     }
 
+    const doYear = e => {
+        if('' === e.target.value) {
+            return;
+        }
+        let y = parseInt(e.target.value);
+        if (isNaN(y)) {
+            setYear('');
+        } else {
+            setYear(Math.min(y, 2022));
+        }
+    }
+
     return (
         <div className="card m-4">
             <h5 className="card-header">New Movie</h5>
@@ -40,7 +52,7 @@ function Create() {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Movie Year</label>
-                    <input type="text" className="form-control" value={year} onChange={e => setYear(e.target.value)} />
+                    <input type="text" className="form-control" value={year} onChange={doYear} />
                 </div>
                 <button onClick={add} type="button" className="btn btn-outline-success">Add</button>
             </div>

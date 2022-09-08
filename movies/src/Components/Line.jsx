@@ -4,7 +4,7 @@ import DataContext from './DataContext';
 
 function Line({ movie }) {
 
-    const { setDeleteData, setModalData } = useContext(DataContext);
+    const { setModalDelData, setModalData } = useContext(DataContext);
 
     return (
         <li className="list-group-item">
@@ -22,7 +22,7 @@ function Line({ movie }) {
                 </div>
                 <div className="movie__buttons">
                     <button onClick={() => setModalData(movie)} type="button" className="btn btn-outline-success">Edit</button>
-                    <button onClick={() => setDeleteData(movie)} type="button" className="btn btn-outline-danger">Delete</button>
+                    <button onClick={() => setModalDelData(movie)} type="button" className="btn btn-outline-danger">Delete</button>
                 </div>
             </div>
         </li>

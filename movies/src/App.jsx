@@ -7,6 +7,7 @@ import List from './Components/List';
 import Messages from './Components/Messages';
 import { create, destroy, read, update } from './Functions/localStorage';
 import { v4 as uuidv4 } from 'uuid';
+import Delete from './Components/Delete';
 
 const key = 'movies';
 
@@ -18,6 +19,7 @@ function App() {
   const [createData, setCreateData] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
   const [modalData, setModalData] = useState(null);
+  const [modalDelData, setModalDelData] = useState(null);
   const [editData, setEditData] = useState(null);
   const [msgs, setMsgs] = useState([]);
 
@@ -69,8 +71,6 @@ function App() {
     }, 6000);
   }
 
-
-
   return (
     <DataContext.Provider value={{
       setCreateData,
@@ -80,7 +80,9 @@ function App() {
       setModalData,
       setEditData,
       msgs,
-      setMsgs
+      setMsgs,
+      modalDelData,
+      setModalDelData
     }}>
       <div className="container">
         <div className="row">
@@ -94,6 +96,7 @@ function App() {
       </div>
       <Edit />
       <Messages />
+      <Delete />
     </DataContext.Provider>
   );
 }
