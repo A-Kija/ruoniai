@@ -1,17 +1,35 @@
+import { useContext } from "react";
+import DataContext from "./DataContext";
+
 function Messages() {
+
+    const { msgs, setMsgs } = useContext(DataContext);
+
+    const closeMsg = id => {
+        setMsgs(m => m.filter(mes => mes.id !== id));
+    }
+
+    if (msgs.length === 0) {
+        return null;
+    }
 
     return (
         <div className="msg-bin">
-            <div className="toast show" role="alert">
-                <div className="toast-header">
-                    <strong className="me-auto">Movies</strong>
-                    <button type="button" className="btn-close"></button>
-                </div>
-                <div className="toast-body">
-                    Hello, world! This is a toast message.
-                </div>
-            </div>
+            {
+                msgs.map(m =>
+                    <div className="toast show" role="alert">
+                        <div className="toast-header">
+                            <strong className="me-auto">Movies</strong>
+                            <button onClick={() => closeMsg(m.id)} type="button" className="btn-close"></button>
+                        </div>
+                        <div className="toast-body">
+                            {m.text}
+                        </div>
+                    </div>
+                )
+            }
         </div>
+
     )
 }
 

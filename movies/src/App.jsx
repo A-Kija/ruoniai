@@ -6,6 +6,7 @@ import Edit from './Components/Edit';
 import List from './Components/List';
 import Messages from './Components/Messages';
 import { create, destroy, read, update } from './Functions/localStorage';
+import { v4 as uuidv4 } from 'uuid';
 
 const key = 'movies';
 
@@ -32,7 +33,8 @@ function App() {
       return;
     }
     create(key, createData);
-    setLastUpdate(Date.now())
+    setLastUpdate(Date.now());
+    makeMsg('Oh, new movie (' + createData.title + ') is here!')
   }, [createData]);
 
   // DELETE
@@ -41,7 +43,8 @@ function App() {
       return;
     }
     destroy(key, deleteData.id);
-    setLastUpdate(Date.now())
+    setLastUpdate(Date.now());
+    makeMsg('Oh no, movie (' + deleteData.title + ') gone!')
   }, [deleteData]);
 
   // EDIT
@@ -54,6 +57,19 @@ function App() {
   }, [editData]);
 
 
+  const makeMsg = text => {
+
+    const msg = {
+      id: uuidv4(),
+      text
+    }
+    setMsgs(m => [...m, msg]);
+    setTimeout(() => {
+      setMsgs(m => m.filter(mes => mes.id !== msg.id));
+    }, 6000);
+  }
+
+
 
   return (
     <DataContext.Provider value={{
@@ -62,7 +78,9 @@ function App() {
       setDeleteData,
       modalData,
       setModalData,
-      setEditData
+      setEditData,
+      msgs,
+      setMsgs
     }}>
       <div className="container">
         <div className="row">
