@@ -22,9 +22,6 @@ function Create() {
     }
 
     const doYear = e => {
-        if('' === e.target.value) {
-            return;
-        }
         let y = parseInt(e.target.value);
         if (isNaN(y)) {
             setYear('');
