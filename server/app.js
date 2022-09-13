@@ -17,7 +17,7 @@ const con = mysql.createConnection({
     user: "root",
     password: "",
     database: "ruo_nei_ka",
-    port: 3307
+    // port: 3307
 });
 
 
