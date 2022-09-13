@@ -19,8 +19,12 @@ const con = mysql.createConnection({
     database: "ruo_nei_ka",
 });
 
+
+
 app.get('/', (req, res) => {
-    res.send('Labas, Bebrai!')
+
+    res.send('Labas, Bebrai!');
+
 });
 
 app.get('/ate', (req, res) => {
@@ -30,6 +34,24 @@ app.get('/ate', (req, res) => {
 app.get('/super/cool', (req, res) => {
     res.send('1234546')
 });
+
+
+// READ
+// SELECT column1, column2, ...
+// FROM table_name;
+
+app.get("/trees", (req, res) => {
+    const sql = `
+    SELECT id, type, title, height
+    FROM trees
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+
 
 app.listen(port, () => {
     console.log(`Bebras klauso ${port} porto!`)
