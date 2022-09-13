@@ -41,12 +41,16 @@ app.get('/super/cool', (req, res) => {
 // SELECT column1, column2, ...
 // FROM table_name;
 
-app.get("/trees", (req, res) => {
+app.get("/trees/:tipas", (req, res) => {
+
+    console.log(req.query.sort);
+
     const sql = `
     SELECT id, type, title, height
     FROM trees
+    WHERE type = ? OR type = ?
     `;
-    con.query(sql, (err, result) => {
+    con.query(sql, [req.params.tipas, req.query.sort], (err, result) => {
         if (err) throw err;
         res.send(result);
     });

@@ -8,7 +8,7 @@ function App() {
     const [trees, setTrees] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3003/trees')
+        axios.get('http://localhost:3003/trees/3/?sort=1')
         .then(res => {
             setTrees(res.data);
         })
@@ -21,7 +21,7 @@ function App() {
             <h1>Server</h1>
             <ul>
             {
-                trees.map(t => <li key={t.id}>{t.title}</li>)
+                trees.map(t => <li key={t.id}>{t.title} <i>{t.height}m</i></li>)
             }
             </ul>
             </header>
