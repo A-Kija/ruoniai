@@ -18,9 +18,9 @@ function App() {
             <header className="App-header">
             <h2 style={{color}}>{number}</h2>
             <h1>Total Recall 2</h1>
-            <Buttons setNumber={setNumber} t={0} c={100}/>
-            <Buttons setNumber={setNumber} t={100} c={20} />
-            <Buttons setNumber={setNumber} t={120}  c={5}/>
+            <Buttons setNumber={setNumber} color="red" t={0} c={100}/>
+            <Buttons setNumber={setNumber} color="green" t={100} c={20} />
+            <Buttons setNumber={setNumber} color="blue" t={120}  c={5}/>
             </header>
         </div>
     );
