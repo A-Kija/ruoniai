@@ -19,6 +19,8 @@ function App() {
             <h2 style={{color}}>{number}</h2>
             <h1>Total Recall 2</h1>
             <Buttons setNumber={setNumber} />
+            <Buttons setNumber={setNumber} />
+            <Buttons setNumber={setNumber} />
             </header>
         </div>
     );
