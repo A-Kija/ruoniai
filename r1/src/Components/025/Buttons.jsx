@@ -1,16 +1,16 @@
-import { useState } from "react";
 
-function Buttons() {
 
-    const [number, setNumber] = useState(0);
+function Buttons({setNumber}) {
+
 
     const doNumber = what => {
-        setNumber(what);
+        setNumber(n => n + what);
     }
+
 
     return (
         <>
-        <h2>{number}</h2>
+        
         <div className="dog-bin">
             {
                 [...Array(50)].map((_, i) => <button key={i} onClick={() => doNumber(i + 1)}>{i + 1}</button>)
