@@ -13,6 +13,17 @@ function App() {
     }, [number]);
 
 
+
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            setNumber(n => n + 1);
+        }, 100);
+        return () => {
+            clearInterval(timerId);
+        }
+    }, []);
+
+
     return (
         <div className="App">
             <header className="App-header">
