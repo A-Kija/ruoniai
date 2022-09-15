@@ -1,6 +1,6 @@
 
 
-function Buttons({setNumber}) {
+function Buttons({setNumber, t, c}) {
 
 
     const doNumber = what => {
@@ -13,7 +13,7 @@ function Buttons({setNumber}) {
         
         <div className="dog-bin">
             {
-                [...Array(50)].map((_, i) => <button key={i} onClick={() => doNumber(i + 1)}>{i + 1}</button>)
+                [...Array(c)].map((_, i) => <button key={i} onClick={() => doNumber(t + (i + 1))}>{t + (i + 1)}</button>)
             }
         </div>
         </>
