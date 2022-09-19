@@ -83,6 +83,18 @@ app.post("/trees", (req, res) => {
     });
 });
 
+//DELETE
+// DELETE FROM table_name WHERE condition;
+app.delete("/trees/:id", (req, res) => {
+    const sql = `
+    DELETE FROM trees
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 app.listen(port, () => {
     console.log(`Bebras klauso ${port} porto!`)
