@@ -17,6 +17,7 @@ function App() {
     const [trees, setTrees] = useState([]);
     const [lastUpdate, setLastUpdate] = useState(Date.now());
     const [createData, setCreateData] = useState(null);
+    const [deleteData, setDeleteData] = useState(null);
 
     useEffect(() => {
         axios.get('http://localhost:3003/trees')
@@ -33,8 +34,17 @@ function App() {
         .then(res => {
             setLastUpdate(Date.now());
         });
-
     }, [createData]);
+
+    useEffect(() => {
+        if (null === deleteData) {
+            return;
+        }
+        axios.delete('http://localhost:3003/trees/' + deleteData.id)
+        .then(res => {
+            setLastUpdate(Date.now());
+        });
+    }, [deleteData]);
 
 
 
@@ -42,7 +52,8 @@ function App() {
         <TreesProvider.Provider value={{
             trees,
             types,
-            setCreateData
+            setCreateData,
+            setDeleteData
         }}>
             <div className="App">
                 <header className="App-header">

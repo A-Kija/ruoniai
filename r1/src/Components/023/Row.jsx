@@ -3,7 +3,13 @@ import TreesProvider from "./TreesProvider";
 
 function Row({ t }) {
 
-    const { types } = useContext(TreesProvider);
+    const { types, setDeleteData } = useContext(TreesProvider);
+
+    const destroy = () => {
+        setDeleteData({
+            id: t.id
+        });
+    }
 
     return (
         <li className="tree-row">
@@ -11,7 +17,7 @@ function Row({ t }) {
             <span> {types.find(tr => tr.id === t.type).type} </span>
             <i>{t.height}m</i>
             <button className="green">Edit</button>
-            <button className="red">Delete</button>
+            <button className="red" onClick={destroy}>Delete</button>
         </li>
     );
 
