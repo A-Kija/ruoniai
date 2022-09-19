@@ -72,6 +72,16 @@ app.get("/trees", (req, res) => {
 //CREATE
 // INSERT INTO table_name (column1, column2, column3, ...)
 // VALUES (value1, value2, value3, ...);
+app.post("/trees", (req, res) => {
+    const sql = `
+    INSERT INTO trees (title, height, type)
+    VALUES (?, ?, ?)
+    `;
+    con.query(sql, [req.body.title, req.body.height, req.body.type], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 
 app.listen(port, () => {

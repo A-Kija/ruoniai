@@ -15,6 +15,7 @@ const types = [
 function App() {
 
     const [trees, setTrees] = useState([]);
+    const [lastUpdate, setLastUpdate] = useState(Date.now());
     const [createData, setCreateData] = useState(null);
 
     useEffect(() => {
@@ -22,12 +23,16 @@ function App() {
             .then(res => {
                 setTrees(res.data);
             })
-    }, []);
+    }, [lastUpdate]);
 
     useEffect(() => {
         if (null === createData) {
             return;
         }
+        axios.post('http://localhost:3003/trees', createData)
+        .then(res => {
+            setLastUpdate(Date.now());
+        });
 
     }, [createData]);
 
