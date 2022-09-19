@@ -15,20 +15,29 @@ const types = [
 function App() {
 
     const [trees, setTrees] = useState([]);
+    const [createData, setCreateData] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:3003/trees/3/?sort=1')
+        axios.get('http://localhost:3003/trees')
             .then(res => {
                 setTrees(res.data);
             })
     }, []);
+
+    useEffect(() => {
+        if (null === createData) {
+            return;
+        }
+
+    }, [createData]);
 
 
 
     return (
         <TreesProvider.Provider value={{
             trees,
-            types
+            types,
+            setCreateData
         }}>
             <div className="App">
                 <header className="App-header">
