@@ -56,6 +56,8 @@ app.get('/super/cool', (req, res) => {
 //     });
 // });
 
+
+// READ
 app.get("/trees", (req, res) => {
     const sql = `
     SELECT id, type, title, height
@@ -67,6 +69,9 @@ app.get("/trees", (req, res) => {
     });
 });
 
+//CREATE
+// INSERT INTO table_name (column1, column2, column3, ...)
+// VALUES (value1, value2, value3, ...);
 
 
 app.listen(port, () => {
