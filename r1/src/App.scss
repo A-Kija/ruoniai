@@ -224,3 +224,10 @@ input {
         color: crimson;
     }
 }
+
+.tree-row {
+    list-style: none;
+    &>* {
+        margin: 0 8px;
+    }
+}
