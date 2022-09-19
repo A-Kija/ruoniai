@@ -1,39 +1,34 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
 import './App.scss';
-import Buttons from './Components/025/Buttons';
-import { useEffect, useState } from 'react';
-import randColor from './Functions/randColor';
+import axios from 'axios';
+import List from './Components/023/List';
+import TreesProvider from './Components/023/TreesProvider';
 
 function App() {
 
-    const [number, setNumber] = useState(0);
-    const [color, setColor] = useState(null);
+    const [trees, setTrees] = useState([]);
 
     useEffect(() => {
-        setColor(randColor());
-    }, [number]);
-
-
-
-    useEffect(() => {
-        const timerId = setInterval(() => {
-            setNumber(n => n + 1);
-        }, 100);
-        return () => {
-            clearInterval(timerId);
-        }
+        axios.get('http://localhost:3003/trees/3/?sort=1')
+        .then(res => {
+            setTrees(res.data);
+        })
     }, []);
 
 
+
     return (
+        <TreesProvider.Provider value={{
+            trees
+        }}>
         <div className="App">
             <header className="App-header">
-            <h2 style={{color}}>{number}</h2>
-            <h1>Total Recall 2</h1>
-            <Buttons setNumber={setNumber} color="red" t={0} c={100}/>
-            <Buttons setNumber={setNumber} color="green" t={100} c={20} />
-            <Buttons setNumber={setNumber} color="blue" t={120}  c={5}/>
+            <h1>Server</h1>
+                <List />
             </header>
         </div>
+        </TreesProvider.Provider>
     );
 }
 
