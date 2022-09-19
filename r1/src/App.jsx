@@ -5,6 +5,7 @@ import axios from 'axios';
 import List from './Components/023/List';
 import TreesProvider from './Components/023/TreesProvider';
 import Create from './Components/023/Create';
+import Edit from './Components/023/Edit';
 
 const types = [
     { id: 1, type: 'Lapuotis' },
@@ -18,6 +19,8 @@ function App() {
     const [lastUpdate, setLastUpdate] = useState(Date.now());
     const [createData, setCreateData] = useState(null);
     const [deleteData, setDeleteData] = useState(null);
+    const [modalData, setModalData] = useState(null);
+    const [editData, setEditData] = useState(null);
 
     useEffect(() => {
         axios.get('http://localhost:3003/trees')
@@ -46,6 +49,16 @@ function App() {
         });
     }, [deleteData]);
 
+    useEffect(() => {
+        if (null === editData) {
+            return;
+        }
+        axios.put('http://localhost:3003/trees/' + editData.id, editData)
+        .then(res => {
+            setLastUpdate(Date.now());
+        });
+    }, [editData]);
+
 
 
     return (
@@ -53,7 +66,10 @@ function App() {
             trees,
             types,
             setCreateData,
-            setDeleteData
+            setDeleteData,
+            modalData,
+            setModalData,
+            setEditData
         }}>
             <div className="App">
                 <header className="App-header">
@@ -61,6 +77,7 @@ function App() {
                     <List />
                 </header>
             </div>
+            <Edit />
         </TreesProvider.Provider>
     );
 }
