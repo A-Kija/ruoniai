@@ -56,8 +56,29 @@ app.get('/super/cool', (req, res) => {
 //     });
 // });
 
+// INNER JOIN
+// SELECT column_name(s)
+// FROM table1
+// INNER JOIN table2
+// ON table1.column_name = table2.column_name;
+app.get("/get-it/inner-join", (req, res) => {
+    const sql = `
+    SELECT c.id, p.id AS pid, name, phone
+    FROM clients AS c
+    INNER JOIN phones AS p
+    ON c.id = p.client_id
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
-// READ
+
+
+
+
+// READ (all)
 app.get("/trees", (req, res) => {
     const sql = `
     SELECT id, type, title, height
