@@ -1,5 +1,7 @@
 import './App.scss';
 import InnerJoin from './Components/027/InnerJoin';
+import LeftJoin from './Components/027/LeftJoin';
+import RightJoin from './Components/027/RightJoin';
 
 function App() {
 
@@ -8,6 +10,8 @@ function App() {
             <header className="App-header">
             <h1>JOIN</h1>
             <InnerJoin />
+            <LeftJoin />
+            <RightJoin />
             </header>
         </div>
     );

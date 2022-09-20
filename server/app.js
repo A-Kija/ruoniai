@@ -74,6 +74,32 @@ app.get("/get-it/inner-join", (req, res) => {
     });
 });
 
+app.get("/get-it/left-join", (req, res) => {
+    const sql = `
+    SELECT c.id, p.id AS pid, name, phone
+    FROM clients AS c
+    LEFT JOIN phones AS p
+    ON c.id = p.client_id
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+app.get("/get-it/right-join", (req, res) => {
+    const sql = `
+    SELECT c.id, p.id AS pid, name, phone
+    FROM clients AS c
+    RIGHT JOIN phones AS p
+    ON c.id = p.client_id
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 
 
 
