@@ -20,6 +20,20 @@ const con = mysql.createConnection({
 });
 
 
+//CREATE
+app.post("/server/suppliers", (req, res) => {
+    const sql = `
+    INSERT INTO electricity_suppliers (title, price)
+    VALUES (?, ?)
+    `;
+    con.query(sql, [req.body.title, req.body.price], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+
+
 
 app.listen(port, () => {
     console.log(`Elektra teka per ${port} portą!`)
