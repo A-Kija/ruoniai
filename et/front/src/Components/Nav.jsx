@@ -1,21 +1,19 @@
+import { NavLink } from "react-router-dom";
+
 function Nav() {
 
     return (
         <div className="container">
             <div className="row">
                 <div className="col-12">
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                         <div className="container-fluid">
-                            <a className="navbar-brand" href="#">Navbar</a>
-                            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                                <span className="navbar-toggler-icon"></span>
-                            </button>
-                            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <span className="navbar-brand">Electro City</span>
+                            <div className="collapse navbar-collapse">
                                 <div className="navbar-nav">
-                                    <a className="nav-link active" aria-current="page" href="#">Home</a>
-                                    <a className="nav-link" href="#">Features</a>
-                                    <a className="nav-link" href="#">Pricing</a>
-                                    <a className="nav-link disabled" href="#" aria-disabled="true">Disabled</a>
+                                    <NavLink to="home" className={ ({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
+                                    <NavLink to="suppliers" className={ ({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Suppliers</NavLink>
+                                    <NavLink to="consumers" className={ ({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Consumers</NavLink>
                                 </div>
                             </div>
                         </div>
