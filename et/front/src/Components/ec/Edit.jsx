@@ -1,15 +1,13 @@
-import { useContext } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import genres from '../Data/genres';
-import DataContext from './DataContext';
+import { useContext, useEffect, useState } from 'react';
+import Consumers from '../../Contexts/Consumers';
+
+
 
 function Edit() {
 
-    const { modalData, setModalData, setEditData } = useContext(DataContext);
+    const { modalData, setModalData, setEditData } = useContext(Consumers);
     const [title, setTitle] = useState('');
-    const [genre, setGenre] = useState('0');
-    const [year, setYear] = useState('');
+    const [price, setPrice] = useState('');
 
 
     useEffect(() => {
@@ -17,20 +15,19 @@ function Edit() {
             return;
         }
         setTitle(modalData.title);
-        setGenre(modalData.genre);
-        setYear(modalData.year);
+        setPrice(modalData.price);
 
     }, [modalData]);
 
     const save = () => {
         setEditData({
             title,
-            genre: parseInt(genre),
-            year,
+            price: parseFloat(price),
             id: modalData.id
         });
         setModalData(null);
     }
+
 
 
     if (null === modalData) {
@@ -42,31 +39,20 @@ function Edit() {
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Edit Movie</h5>
+                        <h5 className="modal-title">Edit Supplier</h5>
                         <button onClick={() => setModalData(null)} type="button" className="btn-close"></button>
                     </div>
                     <div className="modal-body">
                         <div className="card m-4">
-
                             <div className="card-body">
                                 <div className="mb-3">
-                                    <label className="form-label">Movie Title</label>
+                                    <label className="form-label">Supplier Title</label>
                                     <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} />
                                 </div>
                                 <div className="mb-3">
-                                    <label className="form-label">Genre</label>
-                                    <select className="form-select" value={genre} onChange={e => setGenre(e.target.value)}>
-                                        <option value={0} disabled>Choose from list</option>
-                                        {
-                                            genres.map(g => <option key={g.id} value={g.id}>{g.type}</option>)
-                                        }
-                                    </select>
+                                    <label className="form-label">Supplier Price</label>
+                                    <input type="text" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
                                 </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Movie Year</label>
-                                    <input type="text" className="form-control" value={year} onChange={e => setYear(e.target.value)} />
-                                </div>
-
                             </div>
                         </div>
                     </div>

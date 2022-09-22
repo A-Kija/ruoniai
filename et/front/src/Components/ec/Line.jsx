@@ -1,28 +1,26 @@
 import { useContext } from 'react';
-import genres from '../Data/genres';
-import DataContext from './DataContext';
+import Consumers from '../../Contexts/Consumers';
 
-function Line({ movie }) {
 
-    const { setModalDelData, setModalData } = useContext(DataContext);
+function Line({ supplier }) {
+
+    const { setDeleteData, setModalData } = useContext(Consumers);
 
     return (
         <li className="list-group-item">
-            <div className="movie">
-                <div className="movie__content">
-                    <div className="movie__content__title">
-                        {movie.title}
+            <div className="line">
+                <div className="line__content">
+                    <div className="line__content__title">
+                        {supplier.title}
                     </div>
-                    <div className="movie__content__genre">
-                        {genres.find(g => g.id === movie.genre)?.type}
+                    <div className="line__content__info">
+                        {supplier.price} eur/kWh
                     </div>
-                    <div className="movie__content__year">
-                        {movie.year}
-                    </div>
+
                 </div>
-                <div className="movie__buttons">
-                    <button onClick={() => setModalData(movie)} type="button" className="btn btn-outline-success">Edit</button>
-                    <button onClick={() => setModalDelData(movie)} type="button" className="btn btn-outline-danger">Delete</button>
+                <div className="line__buttons">
+                    <button onClick={() => setModalData(supplier)} type="button" className="btn btn-outline-success">Edit</button>
+                    <button onClick={() => setDeleteData(supplier)} type="button" className="btn btn-outline-danger">Delete</button> 
                 </div>
             </div>
         </li>
