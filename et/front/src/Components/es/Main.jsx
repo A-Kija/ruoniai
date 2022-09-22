@@ -3,6 +3,7 @@ import Suppliers from '../../Contexts/Suppliers';
 import Create from '../es/Create';
 import List from '../es/List';
 import axios from 'axios';
+import Edit from './Edit';
 
 function Main() {
 
@@ -10,6 +11,8 @@ function Main() {
     const [createData, setCreateData] = useState(null);
     const [suppliers, setSuppliers] = useState(null);
     const [deleteData, setDeleteData] = useState(null);
+    const [modalData, setModalData] = useState(null);
+    const [editData, setEditData] = useState(null);
 
     useEffect(() => {
         axios.get('http://localhost:3003/server/suppliers')
@@ -38,12 +41,25 @@ function Main() {
         });
     }, [deleteData]);
 
+    useEffect(() => {
+        if (null === editData) {
+            return;
+        }
+        axios.put('http://localhost:3003/server/suppliers/'+ editData.id, editData)
+        .then(res => {
+            setLastUpdate(Date.now());
+        });
+    }, [editData]);
+
 
     return (
         <Suppliers.Provider value={{
             setCreateData,
             suppliers,
-            setDeleteData
+            setDeleteData,
+            modalData,
+            setModalData,
+            setEditData
         }}>
             <div className="container">
                 <div className="row">
@@ -55,6 +71,7 @@ function Main() {
                     </div>
                 </div>
             </div>
+            <Edit />
         </Suppliers.Provider>
     )
 }

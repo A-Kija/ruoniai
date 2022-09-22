@@ -4,7 +4,7 @@ import Suppliers from '../../Contexts/Suppliers';
 
 function Line({ supplier }) {
 
-    const { setDeleteData } = useContext(Suppliers);
+    const { setDeleteData, setModalData } = useContext(Suppliers);
 
     return (
         <li className="list-group-item">
@@ -19,7 +19,7 @@ function Line({ supplier }) {
 
                 </div>
                 <div className="movie__buttons">
-                    {/* <button onClick={() => setModalData(movie)} type="button" className="btn btn-outline-success">Edit</button>*/}
+                    <button onClick={() => setModalData(supplier)} type="button" className="btn btn-outline-success">Edit</button>
                     <button onClick={() => setDeleteData(supplier)} type="button" className="btn btn-outline-danger">Delete</button> 
                 </div>
             </div>
