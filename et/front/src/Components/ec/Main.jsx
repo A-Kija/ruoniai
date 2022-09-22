@@ -26,8 +26,6 @@ function Main() {
         })
     }, []);
 
-
-
     useEffect(() => {
         if (null === createData) {
             return;

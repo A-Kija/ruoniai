@@ -31,6 +31,16 @@ app.post("/server/suppliers", (req, res) => {
         res.send(result);
     });
 });
+app.post("/server/consumers", (req, res) => {
+    const sql = `
+    INSERT INTO electricity_consumers (name, surname, counter_number, supplier_id)
+    VALUES (?, ?, ?, ?)
+    `;
+    con.query(sql, [req.body.name, req.body.surname, req.body.number, req.body.supplier], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 //READ ALL
 app.get("/server/suppliers", (req, res) => {
