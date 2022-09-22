@@ -18,7 +18,7 @@ function Line({ supplier }) {
                     </div>
 
                 </div>
-                <div className="movie__buttons">
+                <div className="line__buttons">
                     <button onClick={() => setModalData(supplier)} type="button" className="btn btn-outline-success">Edit</button>
                     <button onClick={() => setDeleteData(supplier)} type="button" className="btn btn-outline-danger">Delete</button> 
                 </div>

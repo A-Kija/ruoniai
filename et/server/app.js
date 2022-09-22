@@ -56,6 +56,19 @@ app.delete("/server/suppliers/:id", (req, res) => {
     });
 });
 
+//EDIT
+app.put("/server/suppliers/:id", (req, res) => {
+    const sql = `
+    UPDATE electricity_suppliers
+    SET title = ?, price = ?
+    WHERE id = ?
+    `;
+    con.query(sql, [req.body.title, req.body.price, req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 
 
 
