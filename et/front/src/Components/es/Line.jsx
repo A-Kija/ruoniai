@@ -1,9 +1,10 @@
-// import { useContext } from 'react';
-// import DataContext from './DataContext';
+import { useContext } from 'react';
+import Suppliers from '../../Contexts/Suppliers';
+
 
 function Line({ supplier }) {
 
-    // const { setModalDelData, setModalData } = useContext(DataContext);
+    const { setDeleteData } = useContext(Suppliers);
 
     return (
         <li className="list-group-item">
@@ -18,8 +19,8 @@ function Line({ supplier }) {
 
                 </div>
                 <div className="movie__buttons">
-                    {/* <button onClick={() => setModalData(movie)} type="button" className="btn btn-outline-success">Edit</button>
-                    <button onClick={() => setModalDelData(movie)} type="button" className="btn btn-outline-danger">Delete</button> */}
+                    {/* <button onClick={() => setModalData(movie)} type="button" className="btn btn-outline-success">Edit</button>*/}
+                    <button onClick={() => setDeleteData(supplier)} type="button" className="btn btn-outline-danger">Delete</button> 
                 </div>
             </div>
         </li>

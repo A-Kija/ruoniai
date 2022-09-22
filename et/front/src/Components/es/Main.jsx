@@ -6,15 +6,17 @@ import axios from 'axios';
 
 function Main() {
 
+    const [lastUpdate, setLastUpdate] = useState(Date.now());
     const [createData, setCreateData] = useState(null);
     const [suppliers, setSuppliers] = useState(null);
+    const [deleteData, setDeleteData] = useState(null);
 
     useEffect(() => {
         axios.get('http://localhost:3003/server/suppliers')
         .then(res => {
             setSuppliers(res.data);
         })
-    }, []);
+    }, [lastUpdate]);
 
     useEffect(() => {
         if (null === createData) {
@@ -22,15 +24,26 @@ function Main() {
         }
         axios.post('http://localhost:3003/server/suppliers', createData)
         .then(res => {
-
+            setLastUpdate(Date.now());
         });
     }, [createData]);
+
+    useEffect(() => {
+        if (null === deleteData) {
+            return;
+        }
+        axios.delete('http://localhost:3003/server/suppliers/'+ deleteData.id)
+        .then(res => {
+            setLastUpdate(Date.now());
+        });
+    }, [deleteData]);
 
 
     return (
         <Suppliers.Provider value={{
             setCreateData,
-            suppliers
+            suppliers,
+            setDeleteData
         }}>
             <div className="container">
                 <div className="row">
