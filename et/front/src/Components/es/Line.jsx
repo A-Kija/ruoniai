@@ -7,10 +7,13 @@ function Line({ supplier }) {
 
     return (
         <li className="list-group-item">
-            <div className="movie">
-                <div className="movie__content">
-                    <div className="movie__content__title">
+            <div className="line">
+                <div className="line__content">
+                    <div className="line__content__title">
                         {supplier.title}
+                    </div>
+                    <div className="line__content__info">
+                        {supplier.price} eur/kWh
                     </div>
 
                 </div>

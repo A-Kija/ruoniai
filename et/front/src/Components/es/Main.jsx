@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Suppliers from '../../Contexts/Suppliers';
 import Create from '../es/Create';
+import List from '../es/List';
 import axios from 'axios';
 
 function Main() {
@@ -37,7 +38,7 @@ function Main() {
                         <Create />
                     </div>
                     <div className="col-8">
-
+                        <List />
                     </div>
                 </div>
             </div>

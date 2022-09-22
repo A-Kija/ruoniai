@@ -32,6 +32,20 @@ app.post("/server/suppliers", (req, res) => {
     });
 });
 
+//READ ALL
+app.get("/server/suppliers", (req, res) => {
+    const sql = `
+    SELECT *
+    FROM electricity_suppliers
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
+
+
 
 
 
