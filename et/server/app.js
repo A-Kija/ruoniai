@@ -44,6 +44,17 @@ app.get("/server/suppliers", (req, res) => {
     });
 });
 
+//DELETE
+app.delete("/server/suppliers/:id", (req, res) => {
+    const sql = `
+    DELETE FROM electricity_suppliers
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 
 
