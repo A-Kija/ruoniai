@@ -13,17 +13,25 @@ function Edit() {
     const { setEditData, suppliers, modalData, setModalData } = useContext(Consumers);
 
     const edit = () => {
-        // setCreateData({
-        //     name,
-        //     surname,
-        //     number,
-        //     supplier: parseInt(supplier)
-        // });
-        // setName('');
-        // setSurname('');
-        // setNumber('');
-        // setSupplier(0);
+        setEditData({
+            name,
+            surname,
+            number,
+            supplier: parseInt(supplier),
+            id: modalData.id
+        });
+        setModalData(null);
     }
+
+    useEffect(() => {
+        if (null === modalData) {
+            return;
+        }
+        setName(modalData.name);
+        setSurname(modalData.surname);
+        setNumber(modalData.counter_number);
+        setSupplier(modalData.supplier_id);
+    }, [modalData])
 
     if (null === modalData) {
         return null;

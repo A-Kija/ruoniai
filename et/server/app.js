@@ -88,7 +88,17 @@ app.put("/server/suppliers/:id", (req, res) => {
         res.send(result);
     });
 });
-
+app.put("/server/consumers/:id", (req, res) => {
+    const sql = `
+    UPDATE electricity_consumers
+    SET name = ?, surname = ?, counter_number = ?, supplier_id = ?
+    WHERE id = ?
+    `;
+    con.query(sql, [req.body.name, req.body.surname, req.body.number, req.body.supplier, req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 
 
