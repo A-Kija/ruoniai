@@ -64,6 +64,19 @@ app.get("/server/consumers", (req, res) => {
     });
 });
 
+app.get("/server/all", (req, res) => {
+    const sql = `
+    SELECT title, c.*, s.id AS sid, price
+    FROM electricity_suppliers AS s
+    INNER JOIN electricity_consumers AS c
+    ON c.supplier_id = s.id
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 //DELETE
 app.delete("/server/suppliers/:id", (req, res) => {
     const sql = `
