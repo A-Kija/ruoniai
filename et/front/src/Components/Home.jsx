@@ -19,9 +19,9 @@ function Home() {
         <div className="row">
             <div className="col-12">
                 <div className="image">
-                <svg style={{fill}}><use xlinkHref="#electro" ></use></svg>
-                <svg style={{fill}}><use xlinkHref="#electro" ></use></svg>
-                <svg style={{fill}}><use xlinkHref="#electro" ></use></svg>
+                <svg style={{fill}}><use xlinkHref="#electro"></use></svg>
+                <svg style={{fill}}><use xlinkHref="#electro"></use></svg>
+                <svg style={{fill}}><use xlinkHref="#electro"></use></svg>
                 </div>
             </div>
         </div>
