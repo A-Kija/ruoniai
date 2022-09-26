@@ -75,6 +75,16 @@ app.delete("/server/suppliers/:id", (req, res) => {
         res.send(result);
     });
 });
+app.delete("/server/consumers/:id", (req, res) => {
+    const sql = `
+    DELETE FROM electricity_consumers
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 //EDIT
 app.put("/server/suppliers/:id", (req, res) => {
