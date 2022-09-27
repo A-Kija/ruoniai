@@ -1,12 +1,13 @@
 import { useState, useContext, useEffect, useRef } from 'react';
 import Bills from '../../Contexts/Bills';
+import rand from '../../Functions/rand';
 
 function Create() {
 
     const [supplier, setSupplier] = useState('0');
 
     const [consumerId, setConsumerId] = useState('0');
-    const invoice = useRef();
+    const [invoice, setInvoice] = useState('');
     const [kwh, setKwh] = useState('');
     const total = useRef();
 
@@ -25,8 +26,15 @@ function Create() {
 
     useEffect(() => {
         setConsumerId('0');
+        makeInv(supplier);
         setConsumers(c => c?.map(one => one.supplier_id === parseInt(supplier) ? {...one, show: true} : {...one, show: false}))
     }, [supplier, setConsumers, setConsumerId]);
+
+    const makeInv = supplier => {
+        let n = ('' + rand(1, 99999999)).padStart(8, '0');
+
+        setInvoice(n);
+    }
 
     return (
         <div className="card m-4">
@@ -50,7 +58,10 @@ function Create() {
                         }
                     </select>
                 </div>
-
+                <div className="mb-3">
+                    <label className="form-label">Invoice</label>
+                    <input type="text" className="form-control" value={invoice} readOnly={true} />
+                </div>
 
                 {/* <div className="mb-3">
                     <label className="form-label">Supplier Title</label>
