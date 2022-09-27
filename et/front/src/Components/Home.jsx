@@ -63,7 +63,6 @@ function Home() {
                                                 </li>)
                                             }
                                         </ul>
-
                                     </li>
                                     )
                                 }
