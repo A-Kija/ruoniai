@@ -61,6 +61,7 @@ function Main() {
             bills,
             setDeleteData,
             consumers,
+            setConsumers,
             suppliers
         }}>
             <div className="container">

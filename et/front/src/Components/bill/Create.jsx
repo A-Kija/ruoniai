@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import Bills from '../../Contexts/Bills';
 
 function Create() {
@@ -11,7 +10,7 @@ function Create() {
     const [kwh, setKwh] = useState('');
     const total = useRef();
 
-    const { setCreateData, suppliers } = useContext(Bills);
+    const { setCreateData, suppliers, consumers, setConsumers } = useContext(Bills);
 
     const add = () => {
         setCreateData({
@@ -23,6 +22,11 @@ function Create() {
         setConsumerId('0');
         setKwh('');
     }
+
+    useEffect(() => {
+        setConsumerId('0');
+        setConsumers(c => c?.map(one => one.supplier_id === parseInt(supplier) ? {...one, show: true} : {...one, show: false}))
+    }, [supplier, setConsumers, setConsumerId]);
 
     return (
         <div className="card m-4">
@@ -37,6 +41,17 @@ function Create() {
                         }
                     </select>
                 </div>
+                <div className="mb-3">
+                    <label className="form-label">Consumer</label>
+                    <select className="form-select" value={consumerId} onChange={e => setConsumerId(e.target.value)}>
+                        <option value={0} disabled>Choose from list</option>
+                        {
+                            consumers?.map(c => c.show ? <option key={c.id} value={c.id}>{c.name} {c.surname}</option> : null)
+                        }
+                    </select>
+                </div>
+
+
                 {/* <div className="mb-3">
                     <label className="form-label">Supplier Title</label>
                     <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} />
