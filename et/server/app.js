@@ -87,7 +87,7 @@ app.get("/server/all", (req, res) => {
 });
 app.get("/server/bills", (req, res) => {
     const sql = `
-    SELECT b.*, name, surname, title
+    SELECT b.*, name, surname, title, s.id AS sid
     FROM bills AS b
     INNER JOIN electricity_consumers AS c
     ON b.consumer_id = c.id

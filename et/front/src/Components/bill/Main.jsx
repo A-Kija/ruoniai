@@ -17,7 +17,7 @@ function Main() {
     useEffect(() => {
         axios.get('http://localhost:3003/server/bills')
         .then(res => {
-            setBills(res.data);
+            setBills(res.data.map(c => ({...c, show: true})));
         })
     }, [lastUpdate]);
      useEffect(() => {
@@ -62,7 +62,8 @@ function Main() {
             setDeleteData,
             consumers,
             setConsumers,
-            suppliers
+            suppliers,
+            setBills
         }}>
             <div className="container">
                 <div className="row">
