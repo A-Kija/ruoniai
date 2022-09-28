@@ -17,7 +17,7 @@ function Main() {
     useEffect(() => {
         axios.get('http://localhost:3003/server/bills')
         .then(res => {
-            setBills(res.data.map(c => ({...c, show: true})));
+            setBills(res.data.map((c, i) => ({...c, show: true, row: i})));
         })
     }, [lastUpdate]);
      useEffect(() => {
