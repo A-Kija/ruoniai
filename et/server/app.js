@@ -73,12 +73,25 @@ app.get("/server/consumers", (req, res) => {
         res.send(result);
     });
 });
-
 app.get("/server/all", (req, res) => {
     const sql = `
     SELECT title, c.*, s.id AS sid, price
     FROM electricity_suppliers AS s
     INNER JOIN electricity_consumers AS c
+    ON c.supplier_id = s.id
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+app.get("/server/bills", (req, res) => {
+    const sql = `
+    SELECT b.*, name, surname, title
+    FROM bills AS b
+    INNER JOIN electricity_consumers AS c
+    ON b.consumer_id = c.id
+    INNER JOIN electricity_suppliers AS s
     ON c.supplier_id = s.id
     `;
     con.query(sql, (err, result) => {
