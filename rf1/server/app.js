@@ -57,17 +57,17 @@ app.delete("/server/cats/:id", (req, res) => {
 });
 
 //EDIT
-app.put("/server/cats/:id", (req, res) => {
-    const sql = `
-    UPDATE cats
-    SET title = ?
-    WHERE id = ?
-    `;
-    con.query(sql, [req.body.title, req.params.id], (err, result) => {
-        if (err) throw err;
-        res.send(result);
-    });
-});
+// app.put("/server/cats/:id", (req, res) => {
+//     const sql = `
+//     UPDATE cats
+//     SET title = ?
+//     WHERE id = ?
+//     `;
+//     con.query(sql, [req.body.title, req.params.id], (err, result) => {
+//         if (err) throw err;
+//         res.send(result);
+//     });
+// });
 
 
 app.listen(port, () => {
