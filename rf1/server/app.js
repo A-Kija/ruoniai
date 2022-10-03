@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3003;
+app.use(express.json({ limit: '10mb' }));
 const cors = require("cors");
 app.use(cors());
 const mysql = require("mysql");
@@ -32,10 +33,10 @@ app.post("/server/cats", (req, res) => {
 });
 app.post("/server/movies", (req, res) => {
     const sql = `
-    INSERT INTO movies (title, price, cat_id)
-    VALUES (?, ?, ?)
+    INSERT INTO movies (title, price, cat_id, image)
+    VALUES (?, ?, ?, ?)
     `;
-    con.query(sql, [req.body.title, req.body.price, req.body.cat_id], (err, result) => {
+    con.query(sql, [req.body.title, req.body.price, req.body.cat_id, req.body.image], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
