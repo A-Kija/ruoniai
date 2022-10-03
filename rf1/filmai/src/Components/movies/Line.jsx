@@ -13,7 +13,7 @@ function Line({ movie }) {
                         {movie.image ? <div className='img-bin'>
                             <img src={movie.image} alt={movie.title}>
                             </img>
-                        </div> : <span>No image</span>}
+                        </div> : <span className="red-image">No image</span>}
                     </div>
                     <div className="line__content__title">
                         {movie.title}

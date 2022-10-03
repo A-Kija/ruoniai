@@ -60,7 +60,7 @@ function Create() {
                     <label className="form-label">Movie Image</label>
                     <input ref={fileInput} type="file" className="form-control" onChange={doPhoto} />
                 </div>
-                {photoPrint ? <div className='img-bin'><img src={photoPrint} alt="upload image"></img></div> : null}
+                {photoPrint ? <div className='img-bin'><img src={photoPrint} alt="upload"></img></div> : null}
                 <button onClick={add} type="button" className="btn btn-outline-success">Add</button>
             </div>
         </div>
