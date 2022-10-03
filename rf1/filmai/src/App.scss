@@ -7,9 +7,23 @@
 
 .img-bin {
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    label {
+        margin: 0 10px;
+        cursor: pointer;
+        user-select: none;
+    }
+    [type=checkbox] {
+        // display: none;
+    }
     img {
-        height: 150px;
-        width: auto;
+        height: auto;
+        width: 150px;
+        display: block;
+    }
+    [type=checkbox]:checked~img {
+        display: none;
     }
 }
 

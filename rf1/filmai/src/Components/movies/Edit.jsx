@@ -77,7 +77,14 @@ function Edit() {
                                 <label className="form-label">Movie Image</label>
                                 <input ref={fileInput} type="file" className="form-control" onChange={doPhoto} />
                             </div>
-                            {photoPrint ? <div className='img-bin'><img src={photoPrint} alt="upload"></img></div> : null}
+                            {photoPrint ? <div className='img-bin'>
+                                
+                            <label htmlFor="image-delete">delete photo</label>
+                                    <input id="image-delete" type="checkbox"></input>
+                                    
+
+                                <img src={photoPrint} alt="upload"></img>
+                            </div> : null}
                             <button onClick={edit} type="button" className="btn btn-outline-success">Save</button>
                         </div>
                     </div>
