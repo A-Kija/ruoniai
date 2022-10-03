@@ -9,6 +9,12 @@ function Line({ movie }) {
         <li className="list-group-item">
             <div className="line">
                 <div className="line__content">
+                    <div className="line__content__info">
+                        {movie.image ? <div className='img-bin'>
+                            <img src={movie.image} alt={movie.title}>
+                            </img>
+                        </div> : <span>No image</span>}
+                    </div>
                     <div className="line__content__title">
                         {movie.title}
                     </div>
@@ -24,7 +30,7 @@ function Line({ movie }) {
                 </div>
                 <div className="line__buttons">
                     <button onClick={() => setModalData(movie)} type="button" className="btn btn-outline-success">Edit</button>
-                    <button onClick={() => setDeleteData(movie)} type="button" className="btn btn-outline-danger">Delete</button> 
+                    <button onClick={() => setDeleteData(movie)} type="button" className="btn btn-outline-danger">Delete</button>
                 </div>
             </div>
         </li>
