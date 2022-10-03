@@ -102,7 +102,17 @@ app.put("/server/cats/:id", (req, res) => {
         res.send(result);
     });
 });
-
+app.put("/server/movies/:id", (req, res) => {
+    const sql = `
+    UPDATE movies
+    SET title = ?, price = ?, cat_id = ?
+    WHERE id = ?
+    `;
+    con.query(sql, [req.body.title, req.body.price, req.body.cat_id, req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 app.listen(port, () => {
     console.log(`Filmus rodo per ${port} portą!`)
