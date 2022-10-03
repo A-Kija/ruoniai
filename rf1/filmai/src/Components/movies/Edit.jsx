@@ -1,13 +1,22 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import Movies from '../../Contexts/Movies';
-
-
+import getBase64 from '../../Functions/getBase64';
 
 function Edit() {
 
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [cat, setCat] = useState(0);
+    const fileInput = useRef();
+    const [photoPrint, setPhotoPrint] = useState(null);
+
+    const doPhoto = () => {
+        getBase64(fileInput.current.files[0])
+            .then(photo => setPhotoPrint(photo))
+            .catch(_ => {
+                // tylim
+            })
+    }
 
     const { setEditData, cats, modalData, setModalData } = useContext(Movies);
 
@@ -28,6 +37,7 @@ function Edit() {
         setTitle(modalData.title);
         setPrice(modalData.price);
         setCat(modalData.cat_id);
+        setPhotoPrint(modalData.image);
     }, [modalData])
 
     if (null === modalData) {
@@ -63,6 +73,11 @@ function Edit() {
                                     }
                                 </select>
                             </div>
+                            <div className="mb-3">
+                                <label className="form-label">Movie Image</label>
+                                <input ref={fileInput} type="file" className="form-control" onChange={doPhoto} />
+                            </div>
+                            {photoPrint ? <div className='img-bin'><img src={photoPrint} alt="upload"></img></div> : null}
                             <button onClick={edit} type="button" className="btn btn-outline-success">Save</button>
                         </div>
                     </div>
