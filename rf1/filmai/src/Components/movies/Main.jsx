@@ -3,7 +3,7 @@ import Movies from '../../Contexts/Movies';
 import Create from './Create';
 import List from './List';
 import axios from 'axios';
-// import Edit from './Edit';
+import Edit from './Edit';
 
 function Main() {
 
@@ -84,7 +84,7 @@ function Main() {
                     </div>
                 </div>
             </div>
-            {/* <Edit /> */}
+            <Edit />
         </Movies.Provider>
     )
 }

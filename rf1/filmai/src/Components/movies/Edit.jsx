@@ -5,19 +5,17 @@ import Movies from '../../Contexts/Movies';
 
 function Edit() {
 
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [number, setNumber] = useState('');
-    const [supplier, setSupplier] = useState(0);
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
+    const [cat, setCat] = useState(0);
 
-    const { setEditData, suppliers, modalData, setModalData } = useContext(Movies);
+    const { setEditData, cats, modalData, setModalData } = useContext(Movies);
 
     const edit = () => {
         setEditData({
-            name,
-            surname,
-            number,
-            supplier: parseInt(supplier),
+            title,
+            price: parseFloat(price),
+            cat_id: parseInt(cat),
             id: modalData.id
         });
         setModalData(null);
@@ -27,10 +25,9 @@ function Edit() {
         if (null === modalData) {
             return;
         }
-        setName(modalData.name);
-        setSurname(modalData.surname);
-        setNumber(modalData.counter_number);
-        setSupplier(modalData.supplier_id);
+        setTitle(modalData.title);
+        setPrice(modalData.price);
+        setCat(modalData.cat_id);
     }, [modalData])
 
     if (null === modalData) {
@@ -43,30 +40,26 @@ function Edit() {
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Edit Consumer</h5>
+                        <h5 className="modal-title">Edit Movie</h5>
                         <button onClick={() => setModalData(null)} type="button" className="btn-close"></button>
                     </div>
                     <div className="modal-body"></div>
                     <div className="card m-4">
                         <div className="card-body">
                             <div className="mb-3">
-                                <label className="form-label">Consumer Name</label>
-                                <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
+                                <label className="form-label">Movie Title</label>
+                                <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Consumer Surname</label>
-                                <input type="text" className="form-control" value={surname} onChange={e => setSurname(e.target.value)} />
+                                <label className="form-label">Movie Price</label>
+                                <input type="text" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Counter Number</label>
-                                <input type="text" className="form-control" value={number} onChange={e => setNumber(e.target.value)} />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">Suppliers</label>
-                                <select className="form-select" value={supplier} onChange={e => setSupplier(e.target.value)}>
+                                <label className="form-label">Cats</label>
+                                <select className="form-select" value={cat} onChange={e => setCat(e.target.value)}>
                                     <option value={0} disabled>Choose from list</option>
                                     {
-                                        suppliers?.map(s => <option key={s.id} value={s.id}>{s.title}</option>)
+                                        cats?.map(c => <option key={c.id} value={c.id}>{c.title}</option>)
                                     }
                                 </select>
                             </div>
