@@ -30,6 +30,16 @@ app.post("/server/cats", (req, res) => {
         res.send(result);
     });
 });
+app.post("/server/movies", (req, res) => {
+    const sql = `
+    INSERT INTO movies (title, price, cat_id)
+    VALUES (?, ?, ?)
+    `;
+    con.query(sql, [req.body.title, req.body.price, req.body.cat_id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 // READ (all)
 app.get("/server/cats", (req, res) => {
@@ -43,6 +53,19 @@ app.get("/server/cats", (req, res) => {
         res.send(result);
     });
 });
+// READ (all)
+app.get("/server/movies", (req, res) => {
+    const sql = `
+    SELECT *
+    FROM movies
+    ORDER BY id DESC
+    `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 
 //DELETE
 app.delete("/server/cats/:id", (req, res) => {
@@ -55,6 +78,17 @@ app.delete("/server/cats/:id", (req, res) => {
         res.send(result);
     });
 });
+app.delete("/server/movies/:id", (req, res) => {
+    const sql = `
+    DELETE FROM movies
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+
 
 //EDIT
 app.put("/server/cats/:id", (req, res) => {

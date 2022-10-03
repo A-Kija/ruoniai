@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Movies from '../../Contexts/Movies';
 import Create from './Create';
-// import List from './List';
+import List from './List';
 import axios from 'axios';
 // import Edit from './Edit';
 
@@ -80,7 +80,7 @@ function Main() {
                         <Create />
                     </div>
                     <div className="col-8">
-                        {/* <List /> */}
+                        <List />
                     </div>
                 </div>
             </div>

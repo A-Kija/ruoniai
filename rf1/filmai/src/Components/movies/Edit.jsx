@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import Consumers from '../../Contexts/Consumers';
+import Movies from '../../Contexts/Movies';
 
 
 
@@ -10,7 +10,7 @@ function Edit() {
     const [number, setNumber] = useState('');
     const [supplier, setSupplier] = useState(0);
 
-    const { setEditData, suppliers, modalData, setModalData } = useContext(Consumers);
+    const { setEditData, suppliers, modalData, setModalData } = useContext(Movies);
 
     const edit = () => {
         setEditData({

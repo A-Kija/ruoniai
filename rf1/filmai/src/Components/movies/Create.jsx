@@ -3,23 +3,20 @@ import Movies from '../../Contexts/Movies';
 
 function Create() {
 
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [number, setNumber] = useState('');
+    const [title, setTitle] = useState('');
+    const [price, setPrice] = useState('');
     const [cat, setCat] = useState(0);
 
     const { setCreateData, cats } = useContext(Movies);
 
     const add = () => {
         setCreateData({
-            name,
-            surname,
-            number,
-            cat: parseInt(cat)
+            title,
+            price: parseFloat(price),
+            cat_id: parseInt(cat)
         });
-        setName('');
-        setSurname('');
-        setNumber('');
+        setTitle('');
+        setPrice('');
         setCat(0);
     }
 
@@ -28,23 +25,19 @@ function Create() {
             <h5 className="card-header">New Movie</h5>
             <div className="card-body">
                 <div className="mb-3">
-                    <label className="form-label">Movie Name</label>
-                    <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
+                    <label className="form-label">Movie title</label>
+                    <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">Movie Surname</label>
-                    <input type="text" className="form-control" value={surname} onChange={e => setSurname(e.target.value)} />
+                    <label className="form-label">Movie Price</label>
+                    <input type="text" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">Counter Number</label>
-                    <input type="text" className="form-control" value={number} onChange={e => setNumber(e.target.value)} />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Cats</label>
+                    <label className="form-label">Category</label>
                     <select className="form-select" value={cat} onChange={e => setCat(e.target.value)}>
                         <option value={0} disabled>Choose from list</option>
                         {
-                            cats?.map(s => <option key={s.id} value={s.id}>{s.title}</option>)
+                            cats?.map(c => <option key={c.id} value={c.id}>{c.title}</option>)
                         }
                     </select>
                 </div>
