@@ -1,23 +1,38 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef } from 'react';
 import Movies from '../../Contexts/Movies';
+import getBase64 from '../../Functions/getBase64';
 
 function Create() {
 
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
     const [cat, setCat] = useState(0);
+    const fileInput = useRef();
 
     const { setCreateData, cats } = useContext(Movies);
+
+    const [photoPrint, setPhotoPrint] = useState(null);
+
+    const doPhoto = () => {
+        getBase64(fileInput.current.files[0])
+            .then(photo => setPhotoPrint(photo))
+            .catch(_ => {
+                // tylim
+            })
+    }
 
     const add = () => {
         setCreateData({
             title,
             price: parseFloat(price),
-            cat_id: parseInt(cat)
+            cat_id: parseInt(cat),
+            image: photoPrint
         });
         setTitle('');
         setPrice('');
         setCat(0);
+        setPhotoPrint(null);
+        fileInput.current.value = null;
     }
 
     return (
@@ -41,6 +56,11 @@ function Create() {
                         }
                     </select>
                 </div>
+                <div className="mb-3">
+                    <label className="form-label">Movie Image</label>
+                    <input ref={fileInput} type="file" className="form-control" onChange={doPhoto} />
+                </div>
+                {photoPrint ? <div className='img-bin'><img src={photoPrint} alt="upload image"></img></div> : null}
                 <button onClick={add} type="button" className="btn btn-outline-success">Add</button>
             </div>
         </div>
