@@ -31,6 +31,7 @@ function Edit() {
             image: photoPrint
         });
         setModalData(null);
+        setDeletePhoto(false);
     }
 
     useEffect(() => {
@@ -41,6 +42,7 @@ function Edit() {
         setPrice(modalData.price);
         setCat(modalData.cat_id);
         setPhotoPrint(modalData.image);
+        setDeletePhoto(false);
     }, [modalData])
 
     if (null === modalData) {
