@@ -106,7 +106,6 @@ app.put("/server/cats/:id", (req, res) => {
 app.put("/server/movies/:id", (req, res) => {
     let sql;
     let r;
-
     if (req.body.deletePhoto) {
         sql = `
         UPDATE movies
@@ -129,7 +128,6 @@ app.put("/server/movies/:id", (req, res) => {
         `;
         r = [req.body.title, req.body.price, req.body.cat_id, req.params.id]
     }
-
     con.query(sql, r, (err, result) => {
         if (err) throw err;
         res.send(result);

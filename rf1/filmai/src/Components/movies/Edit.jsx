@@ -83,11 +83,8 @@ function Edit() {
                                 <input ref={fileInput} type="file" className="form-control" onChange={doPhoto} />
                             </div>
                             {photoPrint ? <div className='img-bin'>
-                                
-                            <label htmlFor="image-delete">delete photo</label>
-                                    <input id="image-delete" type="checkbox" checked={deletePhoto} onChange={() => setDeletePhoto(d => !d)}></input>
-                                    
-
+                                <label htmlFor="image-delete">X</label>
+                                <input id="image-delete" type="checkbox" checked={deletePhoto} onChange={() => setDeletePhoto(d => !d)}></input>
                                 <img src={photoPrint} alt="upload"></img>
                             </div> : null}
                             <button onClick={edit} type="button" className="btn btn-outline-success">Save</button>
