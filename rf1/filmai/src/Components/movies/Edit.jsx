@@ -9,6 +9,7 @@ function Edit() {
     const [cat, setCat] = useState(0);
     const fileInput = useRef();
     const [photoPrint, setPhotoPrint] = useState(null);
+    const [deletePhoto, setDeletePhoto] = useState(false);
 
     const doPhoto = () => {
         getBase64(fileInput.current.files[0])
@@ -25,7 +26,9 @@ function Edit() {
             title,
             price: parseFloat(price),
             cat_id: parseInt(cat),
-            id: modalData.id
+            id: modalData.id,
+            deletePhoto: deletePhoto ? 1 : 0,
+            image: photoPrint
         });
         setModalData(null);
     }
@@ -80,7 +83,7 @@ function Edit() {
                             {photoPrint ? <div className='img-bin'>
                                 
                             <label htmlFor="image-delete">delete photo</label>
-                                    <input id="image-delete" type="checkbox"></input>
+                                    <input id="image-delete" type="checkbox" checked={deletePhoto} onChange={() => setDeletePhoto(d => !d)}></input>
                                     
 
                                 <img src={photoPrint} alt="upload"></img>
