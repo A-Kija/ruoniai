@@ -10,13 +10,19 @@ function Main() {
         const [movies, setMovies] = useState(null);
         const [rateData, setRateData] = useState(null);
         const filterOn = useRef(false);
+        const filterWhat = useRef(null);
 
 
         // READ for list
         useEffect(() => {
             axios.get('http://localhost:3003/home/movies')
                 .then(res => {
-                    setMovies(res.data.map((d, i) => ({...d, show: true, row: i})));
+                    if (filterOn.current) {
+                        setMovies(res.data.map((d, i) =>
+                         filterWhat.current === d.cat_id ? {...d, show: true, row: i} : {...d, show: false, row: i}));
+                    } else {
+                        setMovies(res.data.map((d, i) => ({...d, show: true, row: i})));
+                    }
                 })
         }, [lastUpdate]);
 
@@ -36,7 +42,8 @@ function Main() {
             movies,
             setRateData,
             setMovies,
-            filterOn
+            filterOn,
+            filterWhat
         }}>
         <div className="container">
             <div className="row">

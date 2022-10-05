@@ -4,11 +4,12 @@ import Line from './Line';
 
 function List() {
 
-    const { movies, setMovies, filterOn } = useContext(Home);
+    const { movies, setMovies, filterOn, filterWhat } = useContext(Home);
 
     const resetFilter = () => {
         setMovies(m => m.map(mo => ({...mo, show: true})));
         filterOn.current = false;
+        filterWhat.current = null;
     }
 
     return (
