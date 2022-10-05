@@ -4,11 +4,15 @@ import Line from './Line';
 
 function List() {
 
-    const { movies } = useContext(Home);
+    const { movies, setMovies } = useContext(Home);
+
+    const resetFilter = () => {
+        setMovies(m => m.map(mo => ({...mo, show: true})));
+    }
 
     return (
         <div className="card m-4">
-            <h5 className="card-header">Movies List</h5>
+            <h5 className="card-header">Movies List <small onClick={resetFilter}>show all cats</small></h5>
             <div className="card-body">
                 <ul className="list-group">
                     {

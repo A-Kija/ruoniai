@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function Line({ movie }) {
 
-    const { setRateData, setMovies } = useContext(Home);
+    const { setRateData, setMovies, filterOn } = useContext(Home);
 
     const [rate, setRate] = useState(5);
 
@@ -18,7 +18,12 @@ function Line({ movie }) {
     }
 
     const filter = () => {
-        setMovies(m => m.map(mo => mo.cat_id === movie.cat_id ? {...mo, show: true} : {...mo, show: false}));
+        if (filterOn.current) {
+            setMovies(m => m.map(mo => ({ ...mo, show: true })));
+        } else {
+            setMovies(m => m.map(mo => mo.cat_id === movie.cat_id ? { ...mo, show: true } : { ...mo, show: false }));
+        }
+        filterOn.current = !filterOn.current;
     }
 
     return (
@@ -49,8 +54,8 @@ function Line({ movie }) {
                         </select>
                     </div>
                     <div className="home__buttons">
-                    <button onClick={doRating} type="button" className="btn btn-outline-success">Rate</button>
-                </div>
+                        <button onClick={doRating} type="button" className="btn btn-outline-success">Rate</button>
+                    </div>
                 </div>
             </div>
         </li>

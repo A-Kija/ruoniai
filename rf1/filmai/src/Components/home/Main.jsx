@@ -2,12 +2,14 @@ import Home from "../../Contexts/Home";
 import List from "./List";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useRef } from "react";
 
 function Main() {
 
         const [lastUpdate, setLastUpdate] = useState(Date.now());
         const [movies, setMovies] = useState(null);
         const [rateData, setRateData] = useState(null);
+        const filterOn = useRef(false);
 
 
         // READ for list
@@ -33,7 +35,8 @@ function Main() {
         <Home.Provider value={{
             movies,
             setRateData,
-            setMovies
+            setMovies,
+            filterOn
         }}>
         <div className="container">
             <div className="row">
