@@ -32,9 +32,17 @@ function List() {
             case 'price_desc':
                 setMovies(m => [...m].sort((b, a) => a.price - b.price));
                 break;
+            case 'rate_asc':
+                setMovies(m => [...m].sort((x, c) => x.rating - c.rating));
+                break;
+            case 'rate_desc':
+                setMovies(m => [...m].sort((jo, no) => no.rating - jo.rating));
+                break;
+            default:
+                setMovies(m => [...m ?? []].sort((a, b) => a.row - b.row));
         }
 
-    }, [sortBy]);
+    }, [sortBy, setMovies]);
 
     return (
         <>
