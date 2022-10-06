@@ -5,6 +5,8 @@ import Home from './Components/home/Main';
 import MainCat from './Components/cats/Main';
 import MainMovies from './Components/movies/Main';
 import { login, logout, authConfig } from './Functions/auth';
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
 function App() {
   return (
