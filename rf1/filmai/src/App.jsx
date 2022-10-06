@@ -13,11 +13,11 @@ function App() {
     <BrowserRouter>
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<RequireAuth role="user"><Home /></RequireAuth>}></Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<LogoutPage />} />
         <Route path="/categories" element={<RequireAuth role="admin"><MainCat /></RequireAuth>}></Route>
-        <Route path="/movies" element={<MainMovies />}></Route>
+        <Route path="/movies" element={<RequireAuth role="admin"><MainMovies /></RequireAuth>}></Route>
       </Routes>
     </BrowserRouter>
   );
