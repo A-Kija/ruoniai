@@ -31,7 +31,11 @@ function RequireAuth({ children, role }) {
       .then(res => {
         if ('ok' === res.data.msg) {
           setView(children);
-        } else {
+        }
+        else if (res.data.status === 2) {
+          setView(<h2>Unauthorize...</h2>)
+        }
+        else {
           setView(<Navigate to="/login" replace />);
         }
       })

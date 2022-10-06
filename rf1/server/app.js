@@ -72,31 +72,26 @@ app.use(doAuth);
 
 // AUTH
 app.get("/login-check", (req, res) => {
-    let sql;
-    let requests;
-    if (req.query.role === 10) {
-        sql = `
-        SELECT
-        name
-        FROM users
-        WHERE session = ? AND role = ?
+    const sql = `
+         SELECT
+         name, role
+         FROM users
+         WHERE session = ?
         `;
-        requests = [req.headers['authorization'] || '', req.query.role];
-    } else {
-        sql = `
-        SELECT
-        name
-        FROM users
-        WHERE session = ?
-        `;
-        requests = [req.headers['authorization'] || ''];
-    }
-    con.query(sql, requests, (err, result) => {
+    con.query(sql, [req.headers['authorization'] || ''], (err, result) => {
         if (err) throw err;
         if (!result.length) {
-            res.send({ msg: 'error' });
+            res.send({ msg: 'error', status: 1 }); // user not logged
         } else {
-            res.send({ msg: 'ok' });
+            if ('admin' === req.query.role) {
+                if (result[0].role !== 10) {
+                    res.send({ msg: 'error', status: 2 }); // not an admin
+                } else {
+                    res.send({ msg: 'ok' });
+                }
+            } else {
+                res.send({ msg: 'ok' });
+            }
         }
     });
 });
