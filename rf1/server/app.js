@@ -87,10 +87,10 @@ app.get("/login-check", (req, res) => {
                 if (result[0].role !== 10) {
                     res.send({ msg: 'error', status: 2 }); // not an admin
                 } else {
-                    res.send({ msg: 'ok' });
+                    res.send({ msg: 'ok', status: 3 }); // is admin
                 }
             } else {
-                res.send({ msg: 'ok' });
+                res.send({ msg: 'ok', status: 4 }); // is user
             }
         }
     });

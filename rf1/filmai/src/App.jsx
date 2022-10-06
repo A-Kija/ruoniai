@@ -11,7 +11,7 @@ import axios from 'axios';
 function App() {
   return (
     <BrowserRouter>
-      <Nav />
+      <ShowNav/>
       <Routes>
         <Route path="/" element={<RequireAuth role="user"><Home /></RequireAuth>}></Route>
         <Route path="/login" element={<LoginPage />} />
@@ -21,6 +21,18 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
+}
+
+
+function ShowNav() {
+  const [status, setStatus] = useState(1);
+  useEffect(() => {
+    axios.get('http://localhost:3003/login-check?role=admin', authConfig())
+      .then(res => {
+        setStatus(res.data.status);
+      })
+  }, []);
+  return <Nav status={status} />
 }
 
 function RequireAuth({ children, role }) {
