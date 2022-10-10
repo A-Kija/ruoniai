@@ -3,6 +3,7 @@ import List from "./List";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRef } from "react";
+import { authConfig } from '../../Functions/auth';
 
 function Main() {
 
@@ -15,7 +16,7 @@ function Main() {
 
         // READ for list
         useEffect(() => {
-            axios.get('http://localhost:3003/home/movies')
+            axios.get('http://localhost:3003/home/movies', authConfig())
                 .then(res => {
                     if (filterOn.current) {
                         setMovies(res.data.map((d, i) =>
@@ -31,7 +32,7 @@ function Main() {
             if (null === rateData) {
                 return;
             }
-            axios.put('http://localhost:3003/home/movies/' + rateData.id, rateData)
+            axios.put('http://localhost:3003/home/movies/' + rateData.id, rateData, authConfig())
             .then(res => {
                 setLastUpdate(Date.now());
             });

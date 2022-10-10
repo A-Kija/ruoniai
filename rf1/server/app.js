@@ -115,10 +115,6 @@ app.post("/login", (req, res) => {
 
 ///////////////////END////////////////////
 
-
-
-
-
 //CREATE
 app.post("/server/cats", (req, res) => {
     const sql = `
