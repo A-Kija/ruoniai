@@ -89,7 +89,7 @@ function LogoutPage({setRoleChange}) {
   useEffect(() => {
     logout();
     setRoleChange(Date.now());
-  }, []);
+  }, [setRoleChange]);
   
   return (
     <Navigate to="/login" replace />
