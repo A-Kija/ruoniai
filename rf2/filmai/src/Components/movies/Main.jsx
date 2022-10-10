@@ -15,17 +15,6 @@ function Main() {
     const [modalData, setModalData] = useState(null);
     const [editData, setEditData] = useState(null);
 
-    const [cats, setCats] = useState(null);
-
-
-
-    // READ for select
-    useEffect(() => {
-        axios.get('http://localhost:3003/server/cats', authConfig())
-            .then(res => {
-                setCats(res.data);
-            })
-    }, []);
     // READ for list
     useEffect(() => {
         axios.get('http://localhost:3003/server/movies', authConfig())
@@ -67,7 +56,6 @@ function Main() {
 
     return (
         <Movies.Provider value={{
-            cats,
             setCreateData,
             movies,
             setDeleteData,
