@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 
 function Nav({status}) {
-console.log(status)
 
     return (
         <div className="container">
