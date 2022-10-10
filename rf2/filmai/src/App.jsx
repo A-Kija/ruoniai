@@ -2,7 +2,7 @@ import './App.scss';
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Nav from './Components/Nav';
 import Home from './Components/home/Main';
-import MainCat from './Components/cats/Main';
+// import MainCat from './Components/cats/Main';
 import MainMovies from './Components/movies/Main';
 import { login, logout, authConfig } from './Functions/auth';
 import { useState, useEffect } from "react";
@@ -19,7 +19,6 @@ function App() {
         <Route path="/" element={<RequireAuth role="user"><Home /></RequireAuth>}></Route>
         <Route path="/login" element={<LoginPage setRoleChange={setRoleChange} />} />
         <Route path="/logout" element={<LogoutPage setRoleChange={setRoleChange} />} />
-        <Route path="/categories" element={<RequireAuth role="admin"><MainCat /></RequireAuth>}></Route>
         <Route path="/movies" element={<RequireAuth role="admin"><MainMovies /></RequireAuth>}></Route>
       </Routes>
     </BrowserRouter>

@@ -19,7 +19,7 @@ const con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "ruoniu_filmai",
+    database: "ruoniu_filmai_3",
 });
 
 ////////////////////LOGIN/////////////////
