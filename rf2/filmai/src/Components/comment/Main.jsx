@@ -24,7 +24,7 @@ function Main() {
 
     // READ for list
     useEffect(() => {
-        axios.get('http://localhost:3003/home/movies', authConfig())
+        axios.get('http://localhost:3003/server/movies/wc', authConfig())
             .then(res => {
                 console.log(reList(res.data));
                 setMovies(reList(res.data));
