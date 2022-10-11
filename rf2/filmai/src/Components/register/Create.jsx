@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext } from 'react';
 import Register from '../../Contexts/Register';
 
 
@@ -36,7 +36,7 @@ function Create() {
                     <label className="form-label">Password 2</label>
                     <input type="password" className="form-control" value={pass2} onChange={e => setPass2(e.target.value)} />
                 </div>
-                <button onClick={add} type="button" className="btn btn-outline-success">Add</button>
+                <button onClick={add} type="button" className="btn btn-outline-success">Register</button>
             </div>
         </div>
     );
