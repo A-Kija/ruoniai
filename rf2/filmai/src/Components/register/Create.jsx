@@ -1,54 +1,41 @@
 import { useState, useContext, useRef } from 'react';
-import Movies from '../../Contexts/Movies';
-import getBase64 from '../../Functions/getBase64';
+import Register from '../../Contexts/Register';
+
 
 function Create() {
 
-    const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
-    const fileInput = useRef();
+    const [name, setName] = useState('');
+    const [pass, setPass] = useState('');
+    const [pass2, setPass2] = useState('');
 
-    const { setCreateData } = useContext(Movies);
-
-    const [photoPrint, setPhotoPrint] = useState(null);
-
-    const doPhoto = () => {
-        getBase64(fileInput.current.files[0])
-            .then(photo => setPhotoPrint(photo))
-            .catch(_ => {
-                // tylim
-            })
-    }
+    const { setCreateUser } = useContext(Register);
 
     const add = () => {
-        setCreateData({
-            title,
-            price: parseFloat(price),
-            image: photoPrint
+        setCreateUser({
+            name,
+            pass
         });
-        setTitle('');
-        setPrice('');
-        setPhotoPrint(null);
-        fileInput.current.value = null;
+        setName('');
+        setPass('');
+        setPass2('');
     }
 
     return (
         <div className="card m-4">
-            <h5 className="card-header">New Movie</h5>
+            <h5 className="card-header">Register</h5>
             <div className="card-body">
                 <div className="mb-3">
-                    <label className="form-label">Movie title</label>
-                    <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} />
+                    <label className="form-label">Name</label>
+                    <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">Movie Price</label>
-                    <input type="text" className="form-control" value={price} onChange={e => setPrice(e.target.value)} />
+                    <label className="form-label">Password</label>
+                    <input type="password" className="form-control" value={pass} onChange={e => setPass(e.target.value)} />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">Movie Image</label>
-                    <input ref={fileInput} type="file" className="form-control" onChange={doPhoto} />
+                    <label className="form-label">Password 2</label>
+                    <input type="password" className="form-control" value={pass2} onChange={e => setPass2(e.target.value)} />
                 </div>
-                {photoPrint ? <div className='img-bin'><img src={photoPrint} alt="upload"></img></div> : null}
                 <button onClick={add} type="button" className="btn btn-outline-success">Add</button>
             </div>
         </div>
