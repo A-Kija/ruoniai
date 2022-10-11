@@ -14,7 +14,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ShowNav roleChange={roleChange}/>
+      <ShowNav roleChange={roleChange} />
       <Routes>
         <Route path="/" element={<RequireAuth role="user"><Home /></RequireAuth>}></Route>
         <Route path="/login" element={<LoginPage setRoleChange={setRoleChange} />} />
@@ -27,7 +27,7 @@ function App() {
 }
 
 
-function ShowNav({roleChange}) {
+function ShowNav({ roleChange }) {
   const [status, setStatus] = useState(1);
   useEffect(() => {
     axios.get('http://localhost:3003/login-check?role=admin', authConfig())
@@ -61,7 +61,7 @@ function RequireAuth({ children, role }) {
 }
 
 
-function LoginPage({setRoleChange}) {
+function LoginPage({ setRoleChange }) {
   const navigate = useNavigate();
 
   const [user, setUser] = useState('');
@@ -78,20 +78,38 @@ function LoginPage({setRoleChange}) {
       })
   }
   return (
-    <div>
-      <div>name: <input type="text" value={user} onChange={e => setUser(e.target.value)}></input></div>
-      <div>password: <input type="password" value={pass} onChange={e => setPass(e.target.value)}></input></div>
-      <button onClick={doLogin}>Login</button>
+
+
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-4">
+          <div className="card m-4">
+            <h5 className="card-header">Login</h5>
+            <div className="card-body">
+              <div className="mb-3">
+                <label className="form-label">name</label>
+                <input type="text" className="form-control" value={user} onChange={e => setUser(e.target.value)} />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">password</label>
+                <input type="password" className="form-control" value={pass} onChange={e => setPass(e.target.value)} />
+              </div>
+              <button onClick={doLogin} type="button" className="btn btn-outline-success">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
   );
 }
 
-function LogoutPage({setRoleChange}) {
+function LogoutPage({ setRoleChange }) {
   useEffect(() => {
     logout();
     setRoleChange(Date.now());
   }, [setRoleChange]);
-  
+
   return (
     <Navigate to="/login" replace />
   )
