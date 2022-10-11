@@ -153,7 +153,7 @@ app.get("/home/movies", (req, res) => {
     const sql = `
     SELECT m.*, c.id AS cid, c.post
     FROM movies AS m
-    INNER JOIN comments AS c
+    LEFT JOIN comments AS c
     ON c.movie_id = m.id
     ORDER BY m.title
     `;
