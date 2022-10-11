@@ -176,6 +176,16 @@ app.delete("/server/movies/:id", (req, res) => {
         res.send(result);
     });
 });
+app.delete("/server/comments/:id", (req, res) => {
+    const sql = `
+    DELETE FROM comments
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
 
 
 //EDIT

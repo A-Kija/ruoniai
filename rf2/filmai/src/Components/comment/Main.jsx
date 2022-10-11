@@ -26,6 +26,7 @@ function Main() {
     useEffect(() => {
         axios.get('http://localhost:3003/home/movies', authConfig())
             .then(res => {
+                console.log(reList(res.data));
                 setMovies(reList(res.data));
             })
     }, [lastUpdate]);

@@ -28,12 +28,12 @@ function Line({ movie }) {
             <div className="comments">
                 <ul className="list-group">
                     {
-                        movie[1]?.map(c => <li key={c.cid} className="list-group-item">
+                        movie[1]?.map(c => c.cid !== null ? <li key={c.cid} className="list-group-item">
                             <p>{c.post}</p>
                             <div className="home__buttons">
                                 <button onClick={() => remove(c.cid)} type="button" className="btn btn-outline-danger">Delete</button>
                             </div>
-                        </li>)
+                        </li> : null)
                     }
                 </ul>
             </div>
