@@ -108,7 +108,7 @@ app.post("/login", (req, res) => {
         if (!result.affectedRows) {
             res.status(401).send({ msg: 'error', key: '' });
         } else {
-            res.send({ msg: 'ok', key, text: 'Good to see you again.', type: 'info' });
+            res.send({ msg: 'ok', key, text: 'Good to see you ' + req.body.user + ' again.', type: 'info' });
         }
     });
 });
