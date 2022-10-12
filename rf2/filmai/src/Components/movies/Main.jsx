@@ -44,6 +44,7 @@ function Main() {
         axios.delete('http://localhost:3003/server/movies/' + deleteData.id, authConfig())
             .then(res => {
                 setLastUpdate(Date.now());
+                makeMsg(res.data.text, res.data.type);
             });
     }, [deleteData]);
 
