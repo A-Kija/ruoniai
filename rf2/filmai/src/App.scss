@@ -57,3 +57,14 @@ h5 small {
     cursor: pointer;
     user-select: none;
 }
+
+.msg-bin {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    .toast {
+        display: block;
+        margin: 10px;
+    }
+}
