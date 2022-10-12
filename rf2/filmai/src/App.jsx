@@ -118,7 +118,7 @@ function LoginPage({ setRoleChange }) {
 
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-4">
+        <div className="col col-lg-4 col-md-12">
           <div className="card m-4">
             <h5 className="card-header">Login</h5>
             <div className="card-body">
