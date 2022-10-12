@@ -18,16 +18,27 @@ function App() {
   const [msgs, setMsgs] = useState([]);
 
 
-  const makeMsg = useCallback(text => {
-      const msg = {
-        id: uuidv4(),
-        text
-      }
-      setMsgs(m => [...m, msg]);
-      setTimeout(() => {
-        setMsgs(m => m.filter(mes => mes.id !== msg.id));
-      }, 6000);
-    }, []);
+  const makeMsg = useCallback((text, type = '') => {
+    let msgTypeClass;
+    switch (type) {
+      case 'success': msgTypeClass = 'ok';
+        break;
+      case 'error': msgTypeClass = 'error';
+        break;
+      case 'info': msgTypeClass = 'info';
+        break;
+      default: msgTypeClass = 'default';
+    }
+    const msg = {
+      id: uuidv4(),
+      text,
+      class: msgTypeClass
+    }
+    setMsgs(m => [...m, msg]);
+    setTimeout(() => {
+      setMsgs(m => m.filter(mes => mes.id !== msg.id));
+    }, 6000);
+  }, []);
 
   return (
     <DataContext.Provider value={{
@@ -35,18 +46,18 @@ function App() {
       setMsgs,
       makeMsg
     }}>
-    <BrowserRouter>
-      <ShowNav roleChange={roleChange} />
-      <Messages/>
-      <Routes>
-        <Route path="/" element={<RequireAuth role="user"><Home /></RequireAuth>}></Route>
-        <Route path="/login" element={<LoginPage setRoleChange={setRoleChange} />} />
-        <Route path="/logout" element={<LogoutPage setRoleChange={setRoleChange} />} />
-        <Route path="/movies" element={<RequireAuth role="admin"><MainMovies /></RequireAuth>}></Route>
-        <Route path="/comments" element={<RequireAuth role="admin"><MainComments /></RequireAuth>}></Route>
-        <Route path="/register" element={<RegisterPage setRoleChange={setRoleChange} />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <ShowNav roleChange={roleChange} />
+        <Messages />
+        <Routes>
+          <Route path="/" element={<RequireAuth role="user"><Home /></RequireAuth>}></Route>
+          <Route path="/login" element={<LoginPage setRoleChange={setRoleChange} />} />
+          <Route path="/logout" element={<LogoutPage setRoleChange={setRoleChange} />} />
+          <Route path="/movies" element={<RequireAuth role="admin"><MainMovies /></RequireAuth>}></Route>
+          <Route path="/comments" element={<RequireAuth role="admin"><MainComments /></RequireAuth>}></Route>
+          <Route path="/register" element={<RegisterPage setRoleChange={setRoleChange} />} />
+        </Routes>
+      </BrowserRouter>
     </DataContext.Provider>
   );
 }

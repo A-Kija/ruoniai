@@ -66,5 +66,17 @@ h5 small {
     .toast {
         display: block;
         margin: 10px;
+        &.ok {
+            background-color: aquamarine;
+            color: white;
+        }
+        &.error {
+            background-color: crimson;
+            color: white;
+        }
+        &.info {
+            background-color: skyblue;
+            color: white;
+        }
     }
 }
